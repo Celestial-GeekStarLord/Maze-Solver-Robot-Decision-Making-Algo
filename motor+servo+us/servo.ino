@@ -7,10 +7,10 @@ int IN2 = 10;
 int IN3 = 11;
 int IN4 = 12;
 
-int trigPin = 7;
-int echoPin = 6;
+int trigPin = 2;
+int echoPin = 3;
 
-int servoPin = 5;
+int servoPin = 6;
 Servo myServo;
 
 long duration;
