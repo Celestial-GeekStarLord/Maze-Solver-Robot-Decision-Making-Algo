@@ -5,8 +5,8 @@ int IN2 = 10;
 int IN3 = 11;
 int IN4 = 12;
 
-int trigPin = 7;
-int echoPin = 6;
+int trigPin = 2;
+int echoPin = 3;
 
 long duration;
 int distance;
