@@ -7,7 +7,7 @@ const int echoPin = 3;
 
 Ultrasonic ultrasonic(trigPin, echoPin);
 
-// Servo setup
+
 Servo myServo;
 const int servoPin = 6;
 
