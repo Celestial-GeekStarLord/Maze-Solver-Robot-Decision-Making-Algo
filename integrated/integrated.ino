@@ -1,38 +1,37 @@
 #include <Servo.h>
-#include <Ultrasonic.h>
 
-
+// Ultrasonic pins
 const int trigPin = 2;
 const int echoPin = 3;
 
-Ultrasonic ultrasonic(trigPin, echoPin);
-
-
+// Servo
 Servo myServo;
 const int servoPin = 6;
 
-
+// Servo angles
 const int LOOK_LEFT = 180;
 const int LOOK_FRONT = 90;
-const int LOOK_RIGHT =  0;
+const int LOOK_RIGHT = 0;
 
-
+// Motor pins
 const int IN1 = 9;
 const int IN2 = 10;
 const int IN3 = 11;
 const int IN4 = 12;
 
-
+// Obstacle threshold
 const int OBSTACLE_DIST = 15;
 
 void setup() {
   Serial.begin(9600);
 
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+
   pinMode(IN1, OUTPUT);
   pinMode(IN2, OUTPUT);
   pinMode(IN3, OUTPUT);
   pinMode(IN4, OUTPUT);
-
 
   myServo.attach(servoPin);
   myServo.write(LOOK_FRONT);
@@ -40,17 +39,12 @@ void setup() {
   delay(1000);
 }
 
-
 void loop() {
-
   int frontDist = readDistance(LOOK_FRONT);
 
   if (frontDist > OBSTACLE_DIST) {
-    
     moveForward();
-  } 
-  else {
-    
+  } else {
     stopMotors();
     delay(200);
 
@@ -65,7 +59,6 @@ void loop() {
       turnRight();
     }
     else {
-      
       moveBackward();
       delay(500);
       turnRight();
@@ -73,33 +66,52 @@ void loop() {
   }
 }
 
-
+// 🔥 Distance function WITHOUT library
 int readDistance(int angle) {
   myServo.write(angle);
-  delay(300); 
-  int d = ultrasonic.Ranging(CM);
+  delay(300);
+
+  // Trigger pulse
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  // Read echo
+  long duration = pulseIn(echoPin, HIGH, 30000);
+
+  int distance;
+
+  if (duration == 0) {
+    distance = 999; // No object detected
+  } else {
+    distance = duration * 0.034 / 2;
+  }
 
   Serial.print("Angle ");
   Serial.print(angle);
   Serial.print(" Distance: ");
-  Serial.println(d);
+  Serial.println(distance);
 
-  return d;
+  return distance;
 }
 
-
+// Movement functions
 void moveForward() {
-  digitalWrite(IN1, HIGH);
-  digitalWrite(IN2, LOW);
-  digitalWrite(IN3, HIGH);
-  digitalWrite(IN4, LOW);
-}
-
-void moveBackward() {
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, HIGH);
+  
+}
+
+void moveBackward() {
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
 }
 
 void turnLeft() {
