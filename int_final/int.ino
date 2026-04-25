@@ -27,7 +27,7 @@ const int ENB = 5;
 // ── Logic ───────────────────────────────────
 const int OBSTACLE_DIST = 20;
 
-// ───────────────────────────────────────────
+
 void setup() {
   Serial.begin(9600);
 
@@ -49,7 +49,7 @@ void setup() {
   delay(1000);
 }
 
-// ───────────────────────────────────────────
+
 void loop() {
 
   int frontDist = getDistance();
@@ -95,9 +95,7 @@ void loop() {
   }
 }
 
-// ═════════════════════════════════════════════
-// ULTRASONIC
-// ═════════════════════════════════════════════
+
 int getDistance() {
   digitalWrite(trigPin, LOW);
   delayMicroseconds(2);
@@ -112,9 +110,7 @@ int getDistance() {
   return distance;
 }
 
-// ═════════════════════════════════════════════
-// MOTOR CONTROL
-// ═════════════════════════════════════════════
+
 void setSpeed() {
   analogWrite(ENA, 255);
   analogWrite(ENB, 255);
