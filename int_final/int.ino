@@ -1,10 +1,10 @@
 #include <Servo.h>
 
-// ── Ultrasonic ───────────────────────────────
+
 const int trigPin = 2;
 const int echoPin = 3;
 
-// ── Servo ───────────────────────────────────
+
 Servo myServo;
 const int servoPin = 6;
 
@@ -12,19 +12,17 @@ const int LOOK_LEFT  = 180;
 const int LOOK_FRONT = 90;
 const int LOOK_RIGHT = 0;
 
-// ── Motor Pins ──────────────────────────────
+
 const int IN1 = 8;
 const int IN2 = 10;
 const int IN3 = 11;
 const int IN4 = 12;
 
-// ── PWM Speed ───────────────────────────────
 const int ENA = 9;
 const int ENB = 5;
 
 
 
-// ── Logic ───────────────────────────────────
 const int OBSTACLE_DIST = 20;
 
 
