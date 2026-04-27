@@ -53,7 +53,7 @@ void loop() {
   int frontDist = getDistance();
 
   if (frontDist > OBSTACLE_DIST) {
-    // move step by step
+    
     moveForward();
     delay(600);
 
